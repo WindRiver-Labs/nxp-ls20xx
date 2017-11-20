@@ -1,0 +1,90 @@
+		NXP LS20XX BSP
+
+
+Table of Contents
+=================
+
+1. Supported Boards
+2. Change History
+3. BSP Features
+4. BSP Notes
+
+
+1. Supported Boards
+===================
+
+This BSP supports the following boards:
+
+  + NXP LS2088A-RDB: Board: LS2088AE Rev1.1-RDB, Board Arch: V1, Board version: F
+
+2. Change History
+=================
+
+  - 2017/12 (US102688): Wind River Linux 10 RCPL03. Standard and preempt-rt
+                       support for NXP LS2088ARDB, based on NXP LSDK1709.
+
+3. BSP Features
+===============
+
+3.1 Supported Features
+======================
+
+The following BSP features are validated and supported on boards where
+the corresponding h/w features exist.
+
+  o General Platform
+	+ HugeTLB
+
+  o Bus
+	+ PCI-Express: On-board Intel E1000e
+	+ I2C: NXP On-Chip I2C controller
+
+  o Network
+	+ Ethernet: 1) Support for up to four (4) of 10 GbE, PHY AQR405, copper (4 x RJ45)
+		    2) Support for up to four (4) of 10 GbE, PHY CS4340, SFP+ (4 x Optical)
+
+  o Storage
+	+ NAND: 2 GB SLC NAND flash
+	+ NOR: 128 MB NOR flash, 8-bit
+	+ SD/MMC: eSDHC controller
+	+ USB: USB 3.0 Host Controller, but can only work on USB 2.0 speed.
+	       User can refer to LS2088A RDB's Erratum E-00011 "USB 3.0
+	       SuperSpeed Devices only train to USB 2.0 (High Speed) Mode".
+	       OTG is only supported on USB port 2(closer to serial port).
+
+  o HW_Offload
+	+ Data Path Accel: BMAN
+	+ Data Path Accel: QMAN
+
+  o Misc Devices
+	+ DPAA2: Linux kernel with DPAA2 networking support
+	+ RTC: DS3232 compatible I2C RTC chip
+	+ SEC Engine: CAAM crypto driver
+	+ UART: 16550 compliant UARTs and LPUARTs
+
+3.2 Unsupported Features
+========================
+
+Same as SDK, the following features are not supported and validated:
+  x DMA Engine: queue direct memory access (QDMA) controller
+  x Decompression and compression engine (DCE 1.0)
+  x Pattern matching engine (PME 2.0)
+  x SATA
+  x SPI
+
+4. BSP Notes
+============
+
+4.1 NXP LS2088A
+===============
+
+4.1.1 Validated Board Info
+--------------------------
+
+This BSP is only validated in following environment. If you use this BSP
+in a different environment it may possibly have some issues.
+
+	SoC:  LS2088AE Rev1.1 (0x87090011)
+	Board: LS2088AE Rev1.1-RDB, Board Arch: V1, Board version: F
+	BootLoader:		U-Boot
+	BootLoader Version:	U-Boot 2017.07-00001-g6e6267a (Oct 30 2017 - 16:05:01 +0800)
