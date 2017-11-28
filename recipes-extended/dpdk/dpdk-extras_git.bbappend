@@ -1,0 +1,1 @@
+COMPATIBLE_MACHINE = "nxp-ls20xx"

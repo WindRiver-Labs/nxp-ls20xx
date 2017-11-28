@@ -1,0 +1,6 @@
+IMAGE_INSTALL += "ceetm"
+IMAGE_INSTALL += "dce"
+IMAGE_INSTALL += "dpdk"
+IMAGE_INSTALL += "odp"
+IMAGE_INSTALL += "ofp"
+IMAGE_INSTALL += "restool"

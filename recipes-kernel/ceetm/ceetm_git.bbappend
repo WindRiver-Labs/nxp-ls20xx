@@ -1,0 +1,2 @@
+COMPATIBLE_MACHINE_nxp-ls20xx = "nxp-ls20xx"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
