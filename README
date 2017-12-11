@@ -293,3 +293,57 @@ mentioned in the section
 in the NXP's SDK user manual
 
 	"Layerscape Software Development Kit 17.09 Documentation.pdf".
+
+
+8. kexec/kdump
+==============
+
+For discussion purposes, some useful terminology will be described here.
+
+boot kernel - the first kernel that you start and supports kexec,
+              from U-Boot for instance.
+capture kernel - the kernel that you reboot into after a boot kernel crash.
+
+To build the boot or capture kernel, use the following option with the configure
+command for your project:
+
+	--template=feature/kexec,feature/kdump
+
+To reserve a memory region for the capture kernel, pass "crashkernel=512M"
+via the U-Boot command line.
+
+NOTES:
+1. Use vmlinux as a secondary kernel. It can be found in the directory
+   tmp-glibc/work/<bsp name>-wrs-linux/linux-yocto/<kernel version>/linux-<bsp name>-<kernel type>-build/vmlinux
+2. 512 MB (the size of the memory reserved for crash kernel) is the
+   recommended amount of memory. If you add more features to the kernel, you
+   can increase this value to accommodate the capture kernel.
+
+Workaround:
+1. Kexec: DPAA2 is unsupported in 2nd kernel.
+   User can use on-board Intel E1000e card to do Ethernet functions in 2nd
+   kernel(e.g., mount NFS, scp).
+   User can turn DPAA2 off in two ways:
+a) Don't call "fsl_mc start" in U-Boot command line, this will disable the
+   DPAA2 both in the 1st and 2nd kernel.
+b) If 1st kernel has already enabled DPAA2, please use the below 3 commands
+   to destroy all DPNI interfaces in 1st kernel before calling "kexec -e":
+
+   # restool dprc show dprc.1 | grep dpni
+   /* Above command is to find all DPNI interfaces. */
+
+   # echo dpni.0 > /sys/bus/fsl-mc/devices/dpni.0/driver/unbind
+   /* Unbind DPNI interface from fsl_mc driver */
+
+   # restool dpni destroy dpni.0
+   /* Destroy this DPNI interface */
+
+2. Kdump: PCI-MSI and SMP is unsupported in 2nd kernel.
+   User needs to append two arguments "pci=nomsi maxcpus=1".
+   Since this 2nd kernel operates under significantly constrained
+   initialization conditions and is not meant to be a "replacement" kernel.
+   Rather it has a single goal -- to enable data collection with respect to
+   the issue that impacted the initial kernel, and nothing else.
+
+For more detailed information about kdump, please refer to
+Documentation/kdump/kdump.txt in the kernel source tree.
