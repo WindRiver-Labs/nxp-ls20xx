@@ -347,3 +347,25 @@ b) If 1st kernel has already enabled DPAA2, please use the below 3 commands
 
 For more detailed information about kdump, please refer to
 Documentation/kdump/kdump.txt in the kernel source tree.
+
+9. DPDK
+=======
+
+9.1 Boot Arguments
+------------------
+The following boot arguments can be used in order to obtain the best performance
+for DPDK applications:
+  default_hugepagesz=1024m hugepagesz=1024m hugepages=8
+
+9.2 Sample Applications
+-----------------------
+In order to get the sample applications provided by the DPDK, you need to enable
+bsp-extras template. You can use the steps like the following to run the sample
+applications. Take the l2fwd as example:
+  1. Configure the DPAA2 resource container:
+       /usr/share/dpdk/dynamic_dpl.sh dpmac.5 dpmac.6
+  2. Setup the environment variable using the container name reported by
+     dynamic_dpl.sh command:
+       export DPRC=dprc.2
+  3. Run the layer 2 forwarding application:
+       /usr/share/examples/l2fwd/l2fwd -c 0x6 -n 1 -- -p 0x3
