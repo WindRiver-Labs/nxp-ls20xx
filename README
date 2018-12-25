@@ -60,7 +60,7 @@ along with patch descriptions use git whatchanged on the default
 kernel (git whatchanged <kernel_type>..<bsp_name>). For example:
 
   # cd tmp-glibc/work-shared/<bsp_name>/kernel-source
-  # git whatchanged standard/base..standard/nxp/lsdk-1709/nxp-ls20xx
+  # git whatchanged standard/base..standard/nxp/lsdk-1812/nxp-ls20xx
 
 
 4. Boot Instructions
@@ -164,7 +164,7 @@ referred to as the alternate bank.
 NXP provides a pre-built image which contains U-Boot, RCW, etc.
 Please download it through:
 
- wget http://www.nxp.com/lgfiles/sdk/lsdk1709/firmware_ls2088ardb_uboot_norboot.img
+ wget http://www.nxp.com/lgfiles/sdk/lsdk1809/firmware_ls2088ardb_uboot_norboot.img
 
 and burn it to the target board under the U-Boot prompt using the commands below:
 
@@ -363,9 +363,9 @@ In order to get the sample applications provided by the DPDK, you need to enable
 bsp-extras template. You can use the steps like the following to run the sample
 applications. Take the l2fwd as example:
   1. Configure the DPAA2 resource container:
-       /usr/share/dpdk/dynamic_dpl.sh dpmac.5 dpmac.6
+       /usr/bin/dpdk-example/extras/dpaa2/dynamic_dpl.sh dpmac.5 dpmac.6
   2. Setup the environment variable using the container name reported by
      dynamic_dpl.sh command:
        export DPRC=dprc.2
   3. Run the layer 2 forwarding application:
-       /usr/share/examples/l2fwd/l2fwd -c 0x6 -n 1 -- -p 0x3
+       /usr/bin/dpdk-example/l2fwd -c 0x6 -n 1 -- -p 0x3
