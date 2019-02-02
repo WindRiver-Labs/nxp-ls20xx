@@ -337,6 +337,8 @@ b) If 1st kernel has already enabled DPAA2, please use the below 3 commands
 
    # restool dpni destroy dpni.0
    /* Destroy this DPNI interface */
+c) User needs to append argument "irqchip.gicv3_nolpi=1" to the first kernel
+   to disable LPI to make Kexec work.
 
 2. Kdump: PCI-MSI and SMP is unsupported in 2nd kernel.
    User needs to append two arguments "pci=nomsi maxcpus=1".
