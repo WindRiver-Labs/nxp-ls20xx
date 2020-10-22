@@ -20,8 +20,8 @@ This BSP supports the following boards:
 2. Change History
 =================
 
+  - 2020/11 (LINUXPG-424): WindRiver Linux 10.19 RCPL13, Standard support based on NXP LSDK20.04.
   - 2019/09 (LINUXPG-101): WindRiver CI/CD branch support: Add BSP support for LS2088A-RDB based on standard/base
-
 
 3. BSP Features
 ===============
@@ -32,19 +32,26 @@ This BSP supports the following boards:
 The following BSP features are validated and supported on boards where
 the corresponding h/w features exist.
 
+  o General Platform
+	+ HugeTLB
+
   o Bus
 	+ PCI-Express: On-board Intel E1000e
 	+ I2C: NXP On-Chip I2C controller
 
   o Network
-	+ Ethernet: Intel E1000e card via PCIe
+	+ Ethernet: 1) Support for up to four (4) of 10 GbE, PHY AQR405, copper (4 x RJ45)
+		    2) Support for up to four (4) of 10 GbE, PHY CS4340, SFP+ (4 x Optical)
 
   o Storage
 	+ NAND: 2 GB SLC NAND flash
+	+ NOR: 128 MB NOR flash, 8-bit
 	+ SD/MMC: eSDHC controller
 	+ USB: DWC3 USB 3.0 Dual-Role-Device (DRD) controller
-	       NXP known hardware issue QSDK-3955: USB flash drive from some vendors like
-               Kingston, Transcend, Samtec does not work reliably on LS2088ARDB.
+
+  o DPAA2
+	+ Data Path Accel: QBMAN
+	+ SEC Engine: CAAM crypto driver
 
   o Misc Devices
 	+ RTC: DS3232 compatible I2C RTC chip
@@ -59,16 +66,6 @@ Same as SDK, the following features are not supported and validated:
   x Pattern matching engine (PME 2.0)
   x SATA
   x SPI
-  x Network
-	- Ethernet: 1) Support for up to four (4) of 10 GbE, PHY AQR405, copper (4 x RJ45)
-		    2) Support for up to four (4) of 10 GbE, PHY CS4340, SFP+ (4 x Optical)
-  x HW_Offload
-	- Data Path Accel: BMAN
-	- Data Path Accel: QMAN
-  x DPAA2: Linux kernel with DPAA2 networking support
-  x NOR: 128 MB NOR flash, 8-bit
-  x SEC Engine: CAAM crypto driver
-  x Power Mgmt
 
 4. BSP Notes
 ============
@@ -85,4 +82,4 @@ in a different environment it may possibly have some issues.
 	SoC:  LS2088AE Rev1.1 (0x87090011)
 	Board: LS2088AE Rev1.1-RDB, Board Arch: V1, Board version: F
 	BootLoader:		U-Boot
-	BootLoader Version:	U-Boot 2019.04-gc873063750 (Jun 27 2019 - 18:08:01 +0800)
+	BootLoader Version:	U-Boot 2019.10-g3cd9bc3993 (Apr 09 2020 - 05:29:23 +0800) 
